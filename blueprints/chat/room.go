@@ -20,7 +20,7 @@ func newRoom() *room {
 		forward: make(chan []byte),
 		join:    make(chan *client),
 		leave:   make(chan *client),
-		clients: map[*client]bool{},
+		clients: make(map[*client]bool),
 	}
 }
 
