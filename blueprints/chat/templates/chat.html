@@ -44,9 +44,9 @@
         socket.onclose = function () {
           alert('connection has been closed.')
         }
-        socket.onmessage = function (e) {
+        socket.onmessage = function (event) {
           li = document.createElement('li')
-          li.textContent = e.data
+          li.textContent = event.data
           messages.appendChild(li)
         }
       }
