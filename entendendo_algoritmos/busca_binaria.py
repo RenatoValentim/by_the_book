@@ -1,7 +1,7 @@
-from typing import Any
+from typing import Any, List
 
 
-def busca_binaria(lista: Any, item: Any) -> int | None:
+def busca_binaria(lista: List[Any], item: Any) -> int | None:
     baixo = 0
     alto = len(lista) - 1
     while baixo <= alto:
