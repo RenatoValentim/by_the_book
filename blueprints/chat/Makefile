@@ -1,19 +1,12 @@
-.PHONY: all deps clean build chat
-BINARY=./chat
+.PHONY: all deps run test
 
 all: deps run
 
 deps:
 	@go mod tidy
 
-build:
-	@go build
-
-run: build
-	@./chat
-
-clean:
-	@rm -rf ./chat
+run:
+	@go run *.go
 
 test:
 	@go test -v -cover -failfast ./...
