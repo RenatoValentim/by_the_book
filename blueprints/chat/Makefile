@@ -14,3 +14,6 @@ run: build
 
 clean:
 	@rm -rf ./chat
+
+test:
+	@go test -v -cover -failfast ./...
