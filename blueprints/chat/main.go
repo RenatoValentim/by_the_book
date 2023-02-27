@@ -32,7 +32,7 @@ func main() {
 	// TODO: uncomment this line to make trace works
 	// r.tracer = trace.New(os.Stdout)
 
-	http.Handle("/", &templateHandler{fileName: "chat.html"})
+	http.Handle("/chat", MustAuth(&templateHandler{fileName: "chat.html"}))
 	http.Handle("/room", r)
 
 	go r.run()
