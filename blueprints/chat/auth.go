@@ -29,10 +29,30 @@ func (h *authHanler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // format: /auth/{action}/{provider}
 func loginHandler(w http.ResponseWriter, r *http.Request) {
-	segs := strings.Split(r.URL.Path, "/")
-	// FIXME: protect this access to will no raise panic
-	action := segs[2]
-	provider := segs[3]
+	rawSegs := strings.Split(r.URL.Path, "/")
+	segs := []string{}
+	for _, s := range rawSegs {
+		if s != "" {
+			segs = append(segs, s)
+		}
+	}
+
+	if len(segs) != 3 {
+		w.Header().Set("Location", "/login")
+		w.WriteHeader(http.StatusTemporaryRedirect)
+		return
+	}
+
+	action := segs[1]
+	provider := segs[2]
+
+	supportedProviders := strings.Contains(provider, "facebook") || strings.Contains(provider, "github") || strings.Contains(provider, "google")
+
+	if !supportedProviders {
+		w.Header().Set("Location", "/login")
+		w.WriteHeader(http.StatusTemporaryRedirect)
+		return
+	}
 
 	switch action {
 	case "login":
